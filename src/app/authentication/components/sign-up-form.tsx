@@ -63,7 +63,7 @@ const SignUpForm = () => {
       email: values.email,
       password: values.password,
       fetchOptions: {
-        onSucess: () => {
+        onSuccess: () => {
           router.push("/");
         },
         onError: (error) => {
@@ -73,7 +73,7 @@ const SignUpForm = () => {
               message: "E-mail já cadastrado.",
             });
           }
-          toast.error(error.error.message)
+          toast.error(error.error.message);
         },
       },
     });
