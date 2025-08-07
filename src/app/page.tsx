@@ -1,6 +1,7 @@
 import { desc } from "drizzle-orm";
 import Image from "next/image";
 
+import BrandList from "@/components/common/brand-list";
 import CategorySelector from "@/components/common/category-selector";
 import Footer from "@/components/common/footer";
 import { Header } from "@/components/common/header";
@@ -16,12 +17,15 @@ const Home = async () => {
     },
   });
 
+  //Busca os produtos mais recentes
   const newlyCreatedProducts = await db.query.productTable.findMany({
     orderBy: [desc(productTable.createdAt)],
     with: {
       variants: true,
     },
   });
+
+  //Busca as categorias para o category-selector
   const categories = await db.query.categoryTable.findMany({});
 
   return (
@@ -38,6 +42,8 @@ const Home = async () => {
             className="h-auto w-full"
           />
         </div>
+
+        <BrandList title="Marcas parceiras" />
 
         <ProductList products={products} title="Mais vendidos" />
 
