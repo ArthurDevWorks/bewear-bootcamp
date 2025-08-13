@@ -36,6 +36,7 @@ export const addProductToCart = async (data: AddProductToCartSchema) => {
   const cart = await db.query.cartTable.findFirst({
     where: (cart, { eq }) => eq(cart.userId, session.user.id),
   });
+  
   let cartId = cart?.id;
 
   //Se nao existir cria o carrinho
